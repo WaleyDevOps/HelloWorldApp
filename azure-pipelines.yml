@@ -56,10 +56,10 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription'
+        azureSubscription: 'MY-VSTs'
         appType: 'webApp'
         WebAppName: 'demo-devapp'
-        packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 - stage: "DeployToQA"
   dependsOn: "DeployToDev"
