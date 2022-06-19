@@ -47,6 +47,8 @@ stages:
   - job: "DepoloyToDevContainer"
     pool:
       vmImage: ubuntu-latest
+    
+ 
     steps:
     - task: DownloadPipelineArtifact@2
       inputs:
@@ -56,7 +58,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription (xxxxxxxx)'
+        azureSubscription: '$(subscription)'
         appType: 'webApp'
         WebAppName: 'demo-devapp'
         packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
@@ -76,7 +78,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription (xxxxxx)'
+        azureSubscription: '$(subscription)'
         appType: 'webApp'
         WebAppName: 'demo-QAapp'
         packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
@@ -96,7 +98,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription (xxxxx)'
+        azureSubscription: '$(subscription)'
         appType: 'webApp'
         WebAppName: 'demo-Prodapp'
         deployToSlotOrASE: true
@@ -105,7 +107,7 @@ stages:
         packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
     - task: AzureAppServiceManage@0
       inputs:
-        azureSubscription: 'MSDN Platforms Subscription(xxxxxx)'
+        azureSubscription: '$(subscription)'
         Action: 'Swap Slots'
         WebAppName: 'demo-Prodapp'
         ResourceGroupName: 'DevOpsRG-class'
