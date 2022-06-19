@@ -59,7 +59,7 @@ stages:
         azureSubscription: 'MSDN Platforms Subscription (9814abae-0012-4890-8435-67170c5b55fb)'
         appType: 'webApp'
         WebAppName: 'demo-devapp'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
 
 - stage: "DeployToQA"
   dependsOn: "DeployToDev"
@@ -79,7 +79,7 @@ stages:
         azureSubscription: 'MSDN Platforms Subscription (9814abae-0012-4890-8435-67170c5b55fb)'
         appType: 'webApp'
         WebAppName: 'demo-QAapp'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
 
 - stage: "DeployToProd"
   dependsOn: "DeployToQA"
@@ -102,7 +102,7 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'DevOpsRG-class'
         SlotName: 'staging'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
     - task: AzureAppServiceManage@0
       inputs:
         azureSubscription: 'MSDN Platforms Subscription(9814abae-0012-4890-8435-67170c5b55fb)'
