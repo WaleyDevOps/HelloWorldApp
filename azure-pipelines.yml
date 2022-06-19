@@ -73,13 +73,14 @@ stages:
         buildType: 'current'
         artifactName: 'drop'
         targetPath: '$(Pipeline.Workspace)'
+
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription'
+        azureSubscription: 'MY-VSTs'
         appType: 'webApp'
         WebAppName: 'demo-QAapp'
-        packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 - stage: "DeployToProd"
   dependsOn: "DeployToQA"
@@ -96,7 +97,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription'
+        azureSubscription: 'MY-VSTs'
         appType: 'webApp'
         WebAppName: 'demo-Prodapp'
         deployToSlotOrASE: true
@@ -105,7 +106,7 @@ stages:
         packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
     - task: AzureAppServiceManage@0
       inputs:
-        azureSubscription: 'MSDN Platforms Subscription'
+        azureSubscription: 'MY-VSTs'
         Action: 'Swap Slots'
         WebAppName: 'demo-Prodapp'
         ResourceGroupName: 'DevOpsRG-class'
