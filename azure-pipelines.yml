@@ -56,7 +56,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription (9814abae-0012-4890-8435-67170c5b55fb)'
+        azureSubscription: 'MSDN Platforms Subscription (xxxxxxxx)'
         appType: 'webApp'
         WebAppName: 'demo-devapp'
         packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
@@ -76,7 +76,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription (9814abae-0012-4890-8435-67170c5b55fb)'
+        azureSubscription: 'MSDN Platforms Subscription (xxxxxx)'
         appType: 'webApp'
         WebAppName: 'demo-QAapp'
         packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
@@ -96,7 +96,7 @@ stages:
     - task: AzureRmWebAppDeployment@4
       inputs:
         ConnectionType: 'AzureRM'
-        azureSubscription: 'MSDN Platforms Subscription (9814abae-0012-4890-8435-67170c5b55fb)'
+        azureSubscription: 'MSDN Platforms Subscription (xxxxx)'
         appType: 'webApp'
         WebAppName: 'demo-Prodapp'
         deployToSlotOrASE: true
@@ -105,7 +105,7 @@ stages:
         packageForLinux: '$(Pipeline.Workspace)/**/*.zip'
     - task: AzureAppServiceManage@0
       inputs:
-        azureSubscription: 'MSDN Platforms Subscription(9814abae-0012-4890-8435-67170c5b55fb)'
+        azureSubscription: 'MSDN Platforms Subscription(xxxxxx)'
         Action: 'Swap Slots'
         WebAppName: 'demo-Prodapp'
         ResourceGroupName: 'DevOpsRG-class'
